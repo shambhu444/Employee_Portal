@@ -1,0 +1,77 @@
+<div mat-dialog-title>
+    <h1 align="center">Employee Form</h1>
+</div>
+<form [formGroup]="empForm" #ngForm="ngForm"  (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content">
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Employee Name</mat-label>
+            <input matInput type="text" placeholder="Ex. Jhonny Depp" formControlName="employee_Name">
+          </mat-form-field>   
+          <div class="validation" *ngIf="empForm.get('employee_Name')?.touched && !empForm.get('employee_Name')?.valid"> 
+            <mat-hint *ngIf="empForm.get('employee_Name')?.errors?.['required']" style="color: red;"> 
+              *Please enter your name
+            </mat-hint> 
+          </div>   
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Age</mat-label>
+            <input matInput type="number" placeholder="Ex. 25" formControlName="age">
+          </mat-form-field>
+          <div class="validation" *ngIf="empForm.get('age')?.touched && !empForm.get('age')?.valid"> 
+            <mat-hint *ngIf="empForm.get('age')?.errors?.['required']" style="color: red;"> 
+              *Please enter your age
+            </mat-hint> 
+          </div>
+    </div>
+    <div class="css-gender">
+        <mat-radio-group [ngClass]="{'invalid': ngForm.submitted && empForm.get('gender').invalid}" aria-label="Select an option" formControlName="gender">
+            <mat-label>Gender:</mat-label>
+            <mat-radio-button value="Male">Male</mat-radio-button>
+            <mat-radio-button value="Female">Female</mat-radio-button>
+            <mat-radio-button value="Others">Others</mat-radio-button>
+        </mat-radio-group> 
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Phone Number</mat-label>
+            <input matInput type="string" placeholder="Ex. 9876542321" formControlName="phone_Number">
+          </mat-form-field>
+          <div class="validation" *ngIf="f.phone_Number.touched && f.phone_Number.invalid" style="color: red;">  
+            <div *ngIf="f.phone_Number.errors.required">Phone Number is required.</div>  
+            <div *ngIf="f.phone_Number.errors.pattern">Please, Enter 10 digit Mobile Number.</div>  
+        </div>  
+    </div>
+    <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Email Id</mat-label>
+            <input matInput type="text" class="form-control" placeholder="Ex. example@gmail.com" formControlName="email_Id">
+          </mat-form-field>
+          <div class="validation" *ngIf="(f.email_Id.invalid && f.email_Id.touched) || f.email_Id.dirty">
+            <div *ngIf="f.email_Id.errors?.required" style="color: red;">Please enter email address</div>
+            <div *ngIf="f.email_Id.errors?.pattern" style="color: red;">Please provide a valid email address</div>
+          </div>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="department">
+              <mat-option *ngFor="let val of department" [value]="val">
+                {{val}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="validation" *ngIf="empForm.get('department')?.touched && !empForm.get('department')?.valid"> 
+            <mat-hint *ngIf="empForm.get('department')?.errors?.['required']" style="color: red;"> 
+              *Please select your department
+            </mat-hint> 
+          </div>
+    </div>
+    </div>
+    <div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+    <button mat-raised-button color="warn" type="button" (click)="data? reset(): empt()">{{data? 'Reset': 'Clear'}}</button>
+    <button mat-raised-button color="primary"  type="submit">{{data? 'Update': 'Register'}}</button>
+    </div>
+</form>
