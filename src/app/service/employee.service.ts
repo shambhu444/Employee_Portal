@@ -10,7 +10,7 @@ export class EmployeeService {
 
   async addEmployee(data: any): Promise<Observable<any>> {
   const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-  const response = this.http.post<any>('https://employeeportal2709.azurewebsites.net/api/Employees', JSON.stringify(data), httpOptions)
+  const response = this.http.post<any>('https://localhost:44375/api/Employees', JSON.stringify(data), httpOptions)
     return response
   }
   
@@ -26,14 +26,14 @@ export class EmployeeService {
   // }
 
   getEmployeeList(): Observable<any> {
-    return this.http.get('https://employeeportal2709.azurewebsites.net/api/Employees');
+    return this.http.get('https://localhost:44375/api/Employees');
   }
 
   updateEmployee(employee_Id: number, data: any): Observable<any> {
-    return this.http.put(`https://employeeportal2709.azurewebsites.net/api/Employees/${employee_Id}`, data);
+    return this.http.put(`https://localhost:44375/api/Employees/${employee_Id}`, data);
   }
 
   deleteEmployee(employee_Id: number): Observable<any> {
-    return this.http.delete(`https://employeeportal2709.azurewebsites.net/api/Employees/${employee_Id}`);
+    return this.http.delete(`https://localhost:44375/api/Employees/${employee_Id}`);
   }
 }
